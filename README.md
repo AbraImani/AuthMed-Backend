@@ -30,7 +30,7 @@ source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## ▶️ Running the Application
+## Running the Application
 
 From the project root directory, start the server with Uvicorn:
 
@@ -96,7 +96,7 @@ If you modify the simulated barcode in `app/analysis_module.py` to a
 value not present in the database, the response status will be
 `"Suspect"`.
 
-## 🔮 Next Steps
+## Next Steps
 
 -   **Integrate a real OCR/QR Code model**\
     Replace the mock logic in `app/analysis_module.py` with libraries
