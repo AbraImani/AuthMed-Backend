@@ -92,18 +92,10 @@ Regardless of the image you send, you should receive:
 }
 ```
 
-If you modify the simulated barcode in `app/analysis_module.py` to a
-value not present in the database, the response status will be
-`"Suspect"`.
-
 ## Next Steps
 
 -   **Integrate a real OCR/QR Code model**\
-    Replace the mock logic in `app/analysis_module.py` with libraries
-    such as `pytesseract` or `pyzbar`.
--   **Integrate a computer vision model**\
-    Use TensorFlow or PyTorch in `analysis_module.py` to detect visual
-    anomalies.
+    Replace the mock logic in `app/analysis_module.py`
 -   **Connect to an external database/API**\
     Update `app/crud.py` to query an external API instead of the local
     SQLite database (sqlalchemy to Postgresql if possible but while we want to make the application in production) .
