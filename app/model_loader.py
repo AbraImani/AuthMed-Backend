@@ -1,38 +1,25 @@
-"""
-Je utiliser ceci pour faire un petit test coté model mais c'est pas vraiment 
-utile dans ce cadre car je veux implementer deux fichier celui de analysis_module.py et
-image_processor.py
-"""
+import os
+import tensorflow as tf
 
-import random
+# Le répertoire où votre modèle est stocké
+MODEL_DIR = "./model"
+# Le nom de votre fichier de modèle.
+MODEL_PATH = os.path.join(MODEL_DIR, "model.tflite")
 
-class DummyModel:
-    def __init__(self):
-        self.labels = ["Authentique", "Contrefait"]
-        print("Modèle factice initialisé.")
-    def predict(self, data: str):
-        """
-        Simule une prédiction.
+def load_tf_model():
+    try:
+        if not os.path.exists(MODEL_PATH):
+            raise FileNotFoundError(
+                f"Le fichier du modèle n'a pas été trouvé à l'emplacement : {MODEL_PATH}. "
+                f"Assurez-vous de placer votre fichier 'model.h5' dans le dossier 'model'."
+            )
         
-        Args:
-            data (str): Les données d'entrée (ignorées dans ce modèle factice).
-            
-        Returns:
-            dict: Un dictionnaire contenant le label et le score de la prédiction.
-        """
-        # Choisit un label au hasard
-        predicted_label = random.choice(self.labels)
-        
-        # Génère un score de confiance aléatoire
-        prediction_score = random.uniform(0.5, 1.0)
-        
-        print(f"Prédiction factice générée: {predicted_label} (Score: {prediction_score:.2f})")
-        
-        return {
-            "label": predicted_label,
-            "score": round(prediction_score, 4)
-        }
+        # Charger le modèle avec Keras
+        model = tf.keras.models.load_model(MODEL_PATH)
+        print("Modèle MobileNet chargé avec succès.")
+        return model
+    except Exception as e:
+        print(f"Erreur critique lors du chargement du modèle TensorFlow : {e}")
+        return None
 
-# Instanciation unique du modèle au chargement du module.
-# L'application utilisera cette instance unique pour toutes les prédictions.
-dummy_model = DummyModel()
+classification_model = load_tf_model()
